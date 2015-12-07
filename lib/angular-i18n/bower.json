@@ -1,0 +1,15 @@
+{
+  "name": "angular-i18n",
+  "version": "1.4.7",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "precommit.sh"
+  ]
+  "overrides": {
+    "angular-i18n": {
+      "main": "angular-locale_ja-jp.js"
+    }
+  }
+}

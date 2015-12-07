@@ -1,0 +1,29 @@
+{
+  "name": "kakei4",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "moduleType": [
+    "node"
+  ],
+  "authors": [
+    "Tetsuya Matsuura"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "bootstrap": "~3.3.5",
+    "angular-i18n": "~1.4.7",
+    "bootstrap-datepicker": "~1.4.1"
+  }
+}
