@@ -19,55 +19,85 @@ MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
         {"id":"010", "title":"Chi-Raq (2015) 	Add to Watchlist Chi-Raq", "description":"A modern day adaptation of the ancient Greek play Lysistrata by Aristophanes, set against the backdrop of gang violence in Chicago.", "releasedDate":"2015","genre":"Drama", "price":"20","purchasedDate":"2015/2/16"}
     ];
 
-    //$http.get('js/data.json').success (function(data){
-    //    $scope.movies = data;
-    //    console.log(data);
-    //});
-
     console.log($scope.dvdList);
 
-//    index = 0;
-//
-//    $scope.add = function() {
-//        $http.put('/appREST/webresources/dvdManagement',{buydate: $scope.buyDate, notes: $scope.notes,
-//            payamount: $scope.payAmount, incomeamount: $scope.incomeAmount,
-//            kamokuid: $scope.kamokuId, consumer: $scope.consumer, payer: $scope.payer
-//            }).success(function(){
-//                //alert('Success');
-//            $("#loginBtn").addClass('hide');
-//            }).error(function(){
-//                alert('Error');
-//        });
-//
-//
-//
-////        $scope.kakeiList.push({id: index, buyDate: $scope.buyDate, payAmount: $scope.payAmount,
-////            incomeAmount: $scope.incomeAmount, kamokuId: $scope.kamokuId, notes: $scope.notes,
-////            consumer: $scope.consumer, payer: $scope.payer});
-////        $scope.message = "";
-////        index++;
-//    };
-//
-//    $scope.delete = function(id) {
-//        alert("Delete?");
-//        $http.delete('/appREST/webresources/dvdManagement/' + id  ).success(function(kakeiList){
-//            $scope.kakeiList = kakeiList;
-//        });
-//    };
-//
-//    $scope.getList = function() {
-//        $http.get('/appREST/webresources/dvdManagement/?searchBuyDateFrom='
-//          + $scope.searchBuyDateFrom + '&searchBuyDateTo=' + $scope.searchBuyDateTo + '&searchNotes=' + $scope.searchNotes
-//          + '&searchKamokuid=' + $scope.searchKamokuid + '&searchConsumer=' + $scope.searchConsumer
-//          + '&searchPayer=' + $scope.searchPayer  ).success(function(kakeiList){
-//          $scope.kakeiList = kakeiList;
-//      });
-//    };
-//
-//    $scope.login = function(user,password) {
-//        $http.get('/appREST/webresources/dvdManagement/login/' + user + "/" + password  ).success(function(userName){
-//            $scope.userName = userName;
-//        });
-//    };
+    index = 0;
+
+    $scope.add = function() {
+        $http.put('/appREST/webresources/dvdManagement',{buydate: $scope.buyDate, notes: $scope.notes,
+            payamount: $scope.payAmount, incomeamount: $scope.incomeAmount,
+            kamokuid: $scope.kamokuId, consumer: $scope.consumer, payer: $scope.payer
+            }).success(function(){
+                //alert('Success');
+            $("#loginBtn").addClass('hide');
+            }).error(function(){
+                alert('Error');
+        });
+
+
+
+        $scope.kakeiList.push({id: index, buyDate: $scope.buyDate, payAmount: $scope.payAmount,
+            incomeAmount: $scope.incomeAmount, kamokuId: $scope.kamokuId, notes: $scope.notes,
+            consumer: $scope.consumer, payer: $scope.payer});
+        $scope.message = "";
+        index++;
+    };
+
+    $scope.delete = function(id) {
+        //alert("Delete?");
+        $http.delete('/appREST/webresources/dvdManagement/' + id  ).success(function(kakeiList){
+            $scope.kakeiList = kakeiList;
+        });
+        $scope.dvdList.splice(id, 1);
+    };
+
+
+
+    $scope.getList = function() {
+        $http.get('/appREST/webresources/dvdManagement/?searchBuyDateFrom='
+          + $scope.searchBuyDateFrom + '&searchBuyDateTo=' + $scope.searchBuyDateTo + '&searchNotes=' + $scope.searchNotes
+          + '&searchKamokuid=' + $scope.searchKamokuid + '&searchConsumer=' + $scope.searchConsumer
+          + '&searchPayer=' + $scope.searchPayer  ).success(function(kakeiList){
+          $scope.kakeiList = kakeiList;
+      });
+    };
+
+    $scope.login = function(user,password) {
+        $http.get('/appREST/webresources/dvdManagement/login/' + user + "/" + password  )
+            .success(function(userName){
+                $scope.userName = userName;
+            }).error(function(userName){
+            $scope.userName = "Offline User Name";
+        });
+    };
+
+    $scope.logout = function() {
+        console.log("aaa");
+        $http.get('/appREST/webresources/dvdManagement/logout/' + $scope.userName)
+            .success(function(){
+                $scope.userName = "";
+            }).error(function(){
+            // TODO　ダミー処理
+            $scope.userName = "";
+        });
+    };
 
 }]);
+
+
+
+MainApp.directive('ngConfirmBoxClick', [
+    function () {
+        return {
+            link: function (scope, element, attr) {
+                var msg = attr.ngConfirmBoxClick || "Are you sure want to delete?";
+                var clickAction = attr.confirmedClick;
+                element.bind('click', function (event) {
+                    if (window.confirm(msg)) {
+                        scope.$eval(clickAction)
+                    }
+                });
+            }
+        };
+    }
+]);

@@ -65,8 +65,11 @@
 
                 <div class="btn-group">
                     <p class="user-name" ng-bind="userName"></p>
-                    <button id="loginBtn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalLogin"><i
+                    <button id="loginBtn" type="button" class="btn btn-danger" ng-hide="userName" data-toggle="modal" data-target="#modalLogin"><i
                             class="glyphicon glyphicon-user"></i> ログイン
+                    </button>
+                    <button id="logoutBtn" type="button" class="btn btn-danger" ng-show="userName" ng-click="logout()"><i
+                            class="glyphicon glyphicon-user"></i> ログアウト
                     </button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegist">
                         <i class="glyphicon glyphicon-pencil"></i> 登録
@@ -89,7 +92,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                    ng-click="login(user,password);getList();">
+                                    ng-click="login(user,password)">
                                 <i class="glyphicon glyphicon-user"></i> ログイン
                             </button>
                             <button class="btn" data-dismiss="modal" aria-hidden="true">閉じる</button>
@@ -108,105 +111,54 @@
                                 <table class="table">
                                     <thead>
                                     <tr class="active">
-                                        <th colspan="2">登録</th>
+                                        <th colspan="2">Register</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td>
-                                            <label for="buyDate">日付</label>
+                                            <label for="notes">Title</label>
                                         </td>
                                         <td>
-                                            <input id="buyDate" type="text" name="buyDate" size="7" ng-model="buyDate"
+                                            <input id="title" type="text" name="title" ng-model="title" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="notes">Description</label>
+                                        </td>
+                                        <td>
+                                            <input id="description" type="text" name="description" ng-model="description" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="notes">Genre</label>
+                                        </td>
+                                        <td>
+                                            <input id="genre" type="text" name="genre" ng-model="genre" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="notes">Purchased Date</label>
+                                        </td>
+                                        <td>
+                                            <input id="purchasedDate" type="text" name="purchasedDate" size="7" ng-model="buyDate"
                                                    required>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td nowrap>
-                                            <label for="payAmount">支払金額</label>
+                                            <label for="price">Price</label>
                                         </td>
                                         <td>
                                             <div class="input-group">
                                                 <span class="input-group-addon">￥</span>
-                                                <input id="payAmount" type="number" name="payAmount" 　value="0" size="7"
-                                                       ng-model="payAmount" class="currency form-control">
+                                                <input id="price" type="number" name="price" 　value="0" size="7"
+                                                       ng-model="price" class="currency form-control">
 
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="incomeAmount">収入金額</label>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">￥</span>
-                                                <input id="incomeAmount" type="number" name="incomeAmount"
-                                                       　class="form-control"
-                                                       value="0" size="7" ng-model="incomeAmount"
-                                                       class="currency form-control">
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <label for="kamokuId">課目</label>
-                                        </td>
-                                        <td>
-                                            <select id="kamokuId" name="kamokuId" size="1" ng-model="kamokuId" required>
-                                                <option value="">選択してください</option>
-                                                <option value="1">食費</option>
-                                                <option value="2">交通費</option>
-                                                <option value="3">住居費</option>
-                                                <option value="4">公共料金</option>
-                                                <option value="5">日用品</option>
-                                                <option value="6">贅沢品</option>
-                                                <option value="7">交際費</option>
-                                                <option value="8">給与</option>
-                                                <option value="9">その他</option>
-                                                <option value="10">必要</option>
-                                                <option value="11">医療費</option>
-                                                <option value="12">教育費</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <label for="notes">摘要</label>
-                                        </td>
-                                        <td>
-                                            <input id="notes" type="text" name="notes" ng-model="notes" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="consumer">消費者</label>
-                                        </td>
-                                        <td>
-                                            <select id="consumer" name="consumer" size="1" ng-model="consumer" required>
-                                                <option value="">選択してください</option>
-                                                <option value="1">両方</option>
-                                                <option value="2">ちか</option>
-                                                <option value="3" selected="selected">てつや</option>
-                                                <option value="4">はるや</option>
-                                                <option value="5">りょうや</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="payer">支払者</label>
-                                        </td>
-                                        <td>
-                                            <select id="payer" name="payer" size="1" ng-model="payer" required>
-                                                <option value="">選択してください</option>
-                                                <option value="2">ちか</option>
-                                                <option value="3">てつや</option>
-                                                <option value="4">はるや</option>
-                                                <option value="5">りょうや</option>
-                                            </select>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -311,23 +263,24 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in dvdList">
-                    <td nowrap><img src="img/small/{{item.id}}.jpg" alt="{{item.title}} image"/> </td>
+                    <td nowrap><img ng-elevate-zoom ng-src="img/small/{{item.id}}.jpg" zoom-image="img/large/{{item.id}}.jpg" /> </td>
                     <td>{{item.title}}({{item.releasedDate}})</td>
                     <td>{{item.description}}</td>
                     <td>{{item.genre}}</td>
                     <td>{{item.purchasedDate | date:"yyyy/mm/dd"}}</td>
                     <td nowrap class="currency">{{item.price | currency: "USD$":0}}</td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="edit(item.id);">
+                        <button type="button" class="btn btn-warning btn-xs btn-block" ng-click="edit($index);">
                             Edit
-                        </button>
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="delete(kakei.id);">
+                        </button><br>
+                        <button type="button" class="btn btn-danger btn-xs btn-block" confirmed-click="delete($index)" ng-confirm-box-click="Are you sure want to delete?">
                             Delete
                         </button>
                     </td>
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
