@@ -36,68 +36,15 @@
 </head>
 <body>
 
-
-<!--
-<header style="background-color: #777;" class="container">家計簿　4
-</header>
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#">Kakei4</a></li>
-    <li><a href="https://www.tetair.net/hkb3/faces/index.xhtml">Kakei3</a></li>
-    <li><a href="http://www.tetair.net/cgi-bin/mt33/mt.cgi?__mode=menu&blog_id=1">Blog</a></li>
-    <li><a href="http://www.tetair.net/haruya/upload_result.html">Upload</a></li>
-    <li><a href="http://www.tetair.net/haruya/">Haruya/Ryoya</a></li>
-</ul>
-    <p><img class="img-responsive center-block" src="img/title.jpg"></p>
-        <button type="button" class="btn btn-primary text-imgIcon btn-xs" data-toggle="modal"
-            data-target="#myModal2"
-            ><i class="glyphicon glyphicon-pencil"></i> 登録
-    </button>
-                    <button type="button" class="btn btn-primary text-imgIcon btn-xs" data-toggle="modal"
-                            data-target="#myModal2"
-                            ><i class="glyphicon glyphicon-pencil"></i> 登録2
-                    </button>
-
--->
 <div ng-controller="appCtrl">
     <div class="jumbotron">
         <div class="container">
             <div class="text-center">
 
                 <div class="btn-group">
-                    <p class="user-name" ng-bind="userName"></p>
-                    <button id="loginBtn" type="button" class="btn btn-danger" ng-hide="userName" data-toggle="modal" data-target="#modalLogin"><i
-                            class="glyphicon glyphicon-user"></i> ログイン
-                    </button>
-                    <button id="logoutBtn" type="button" class="btn btn-danger" ng-show="userName" ng-click="logout()"><i
-                            class="glyphicon glyphicon-user"></i> ログアウト
-                    </button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegist">
-                        <i class="glyphicon glyphicon-pencil"></i> 登録
+                        <i class="glyphicon glyphicon-pencil"></i>Register
                     </button>
-                </div>
-            </div>
-            <div id="modalLogin" class="modal fade" data-keyboard="false">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="modalLoginLabel">ログイン</h3>
-                        </div>
-                        <div class="modal-body">
-                            <select id="user" name="user" size="1" ng-model="user">
-                                <option value="c-matsu">ちか</option>
-                                <option value="t-matsu">てつや</option>
-                            </select>
-                            <input id="password" type="password" name="password" ng-model="password" size="5">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                    ng-click="login(user,password)">
-                                <i class="glyphicon glyphicon-user"></i> ログイン
-                            </button>
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">閉じる</button>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div id="modalRegist" class="modal fade" data-keyboard="false">
@@ -105,71 +52,60 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Register</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="#ACTION" accept-charset="euc-jp" method="post" name="inputForm" novalidate>
-                                <table class="table">
-                                    <thead>
-                                    <tr class="active">
-                                        <th colspan="2">Register</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <label for="notes">Title</label>
-                                        </td>
-                                        <td>
-                                            <input id="title" type="text" name="title" ng-model="title" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="notes">Description</label>
-                                        </td>
-                                        <td>
-                                            <input id="description" type="text" name="description" ng-model="description" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="notes">Genre</label>
-                                        </td>
-                                        <td>
-                                            <input id="genre" type="text" name="genre" ng-model="genre" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="notes">Purchased Date</label>
-                                        </td>
-                                        <td>
-                                            <input id="purchasedDate" type="text" name="purchasedDate" size="7" ng-model="buyDate"
-                                                   required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td nowrap>
-                                            <label for="price">Price</label>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">￥</span>
-                                                <input id="price" type="number" name="price" 　value="0" size="7"
-                                                       ng-model="price" class="currency form-control">
+                            <form action="#ACTION" accept-charset="euc-jp" class="form-horizontal" method="post" name="inputForm" novalidate>
+                                <div class="form-group">
+                                <label for="title" class="control-label col-sm-3">Title:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="Enter Title" id="title" ng-model="title" required>
+                                    </div>
+                                </div>
 
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="form-group">
+                                    <label for="description" class="control-label col-sm-3">Description:</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" rows="5" placeholder="Enter Description" id="description" ng-model="description" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Genre:</label>
+                                    <div class="col-sm-9">
+                                        <label class="checkbox-inline"><input type="checkbox" value="Action">Action</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Adventure">Adventure</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Fantasy">Fantasy</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Sci-Fi">Sci-Fi</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Drama">Drama</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Sport">Sport</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Comedy">Comedy</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Thriller">Thriller</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Crime">Crime</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="Horror">Horror</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Purchased Date:</label>
+                                    <div class='col-sm-9 date'>
+                                        <input id="purchasedDate" class="form-control" type="text" name="purchasedDate"  ng-model="purchasedDate" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">Price:</label>
+
+                                    <div class='input-group'>
+                                        <span class="input-group-addon">$</span>
+                                        <input id="price" type="text" name="price" value="0" size="7"
+                                               ng-model="price" class="form-control currency" placeholder="Enter Price">
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                    ng-disabled="inputForm.$invalid" ng-click="add();getList();">登録
+                                    ng-disabled="inputForm.$invalid" ng-click="add()">Register
                             </button>
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">閉じる</button>
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -270,7 +206,7 @@
                     <td>{{item.purchasedDate | date:"yyyy/mm/dd"}}</td>
                     <td nowrap class="currency">{{item.price | currency: "USD$":0}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning btn-xs btn-block" ng-click="edit($index);">
+                        <button type="button" class="btn btn-warning btn-xs btn-block" ng-click="edit($index);" data-target="#modalEdit">
                             Edit
                         </button><br>
                         <button type="button" class="btn btn-danger btn-xs btn-block" confirmed-click="delete($index)" ng-confirm-box-click="Are you sure want to delete?">
