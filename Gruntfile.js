@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     cssmin: {
       compress: {
         files: {
-          './min.css': ['css/ng-layout.css', 'css/style.css']
+          './min.css': ['css/dvdManagement.css', 'css/style.css']
         }
       }
     },
@@ -16,26 +16,26 @@ module.exports = function(grunt) {
     bower: {
       install: {
         options: {
-          targetDir: './lib', //ƒ‰ƒCƒuƒ‰ƒŠ‚Ì”z’uæ‚ÌƒfƒBƒŒƒNƒgƒŠ
-          layout: 'byType', // ƒŒƒCƒAƒEƒgAà–¾‚ÍŒãq‚µ‚Ü‚·
-          install: true, //gruntÀs‚Ébower install‚ğÀs‚·‚é‚©‚Ç‚¤‚©
-          verbose: false, // ƒƒO‚ÌÚ×‚ğo‚·‚©‚Ç‚¤‚©
-          cleanTargetDir: true, // targetDir‚ğíœ‚·‚é‚©‚Ç‚¤‚©
-          cleanBowerDir: false // bower‚ÌcomponentsƒfƒBƒŒƒNƒgƒŠ‚ğíœ‚·‚é‚©‚Ç‚¤‚©
+          targetDir: './lib', //ï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Ì”zï¿½uï¿½ï¿½Ìƒfï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½
+          layout: 'byType', // ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ÍŒï¿½qï¿½ï¿½ï¿½Ü‚ï¿½
+          install: true, //gruntï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½bower installï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½
+          verbose: false, // ï¿½ï¿½ï¿½Oï¿½ÌÚ×‚ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
+          cleanTargetDir: true, // targetDirï¿½ï¿½ï¿½íœï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½
+          cleanBowerDir: false // bowerï¿½ï¿½componentsï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½íœï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½
         }
       }
     }
 
   });
 
-  // package.json‚É‘‚©‚ê‚Ä‚¢‚éAgrunt-contrib-cssmin‚Ægrunt-contrib-watch‚ğg—p‚µ‚Ü‚·B
-  // ƒvƒ‰ƒOƒCƒ“‚ÍƒCƒ“ƒXƒg[ƒ‹‚µ‚½‚Ü‚Ü‚Å‚Í“®‚«‚Ü‚¹‚ñB
-  // loadNpmTasks‚ğg—p‚µ‚ÄAƒvƒ‰ƒOƒCƒ“‚ğ“Ç‚İ‚İ‚Ü‚·B
+  // package.jsonï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Agrunt-contrib-cssminï¿½ï¿½grunt-contrib-watchï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
+  // ï¿½vï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ÍƒCï¿½ï¿½ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚Ü‚Å‚Í“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B
+  // loadNpmTasksï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ÄAï¿½vï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½İ‚Ü‚ï¿½ï¿½B
   // grunt.loadNpmTasks('grunt-contrib-cssmin');
   // grunt.loadNpmTasks('grunt-contrib-watch');
 
-  // –{—ˆ‚Íã‚Ì‚æ‚¤‚ÉloadNpmTasks‚Åƒvƒ‰ƒOƒCƒ“‚ğƒ[ƒh‚·‚é•K—v‚ª‚ ‚é‚ª
-  // package.json‚Ìdependency‚Ì‹Lq‚ğ—˜—p‚µ‚Ä©“®“I‚Éƒ[ƒh‚·‚é‚±‚Æ‚ª‚Å‚«‚é
+  // ï¿½{ï¿½ï¿½ï¿½Íï¿½Ì‚æ‚¤ï¿½ï¿½loadNpmTasksï¿½Åƒvï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½é‚ª
+  // package.jsonï¿½ï¿½dependencyï¿½Ì‹Lï¿½qï¿½ğ—˜—pï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½Iï¿½Éƒï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½é‚±ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
   var pkg = grunt.file.readJSON('package.json');
   var taskName;
   for(taskName in pkg.devDependencies) {
@@ -46,8 +46,8 @@ module.exports = function(grunt) {
 
 
 
-  // ¡‰ñ‚Í”‚ª­‚È‚¢‚Å‚·‚ªA‚±‚Ì‚â‚è•û‚¾‚Æ•¡”‚Ìƒ^ƒXƒN‚ğ‡”Ô‚ÉÀs‚·‚é‚Ì‚ª–Ê“|‚Å‚·B
-  // ‚æ‚­g—p‚·‚éƒ^ƒXƒN‚ğGruntfile.js‚É“o˜^‚µ‚Ä‚¨‚«‚Ü‚·B
-  // ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Å grunt ‚Æ“ü—Í‚·‚é‚¾‚¯‚Å‘Sƒ^ƒXƒN‚ğÀs‚Å‚«‚é
+  // ï¿½ï¿½ï¿½ï¿½Íï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ•ï¿½ï¿½ï¿½ï¿½Ìƒ^ï¿½Xï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Ô‚Éï¿½ï¿½sï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½Ê“|ï¿½Å‚ï¿½ï¿½B
+  // ï¿½æ‚­ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½^ï¿½Xï¿½Nï¿½ï¿½Gruntfile.jsï¿½É“oï¿½^ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
+  // ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ grunt ï¿½Æ“ï¿½ï¿½Í‚ï¿½ï¿½é‚¾ï¿½ï¿½ï¿½Å‘Sï¿½^ï¿½Xï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½sï¿½Å‚ï¿½ï¿½ï¿½
   grunt.registerTask('default', ['cssmin', 'watch']);
 };

@@ -6,18 +6,24 @@ var MainApp = angular.module('mainApp', []);
 
 MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.dvdList = [
-        {"id":"001", "title":"Star Wars: The Force Awakens", "description":"A continuation of the saga created by George Lucas and set thirty years after Jedai no fukushuu (1983).", "releasedDate":"2015","genre":"Action | Adventure | Fantasy | Sci-Fi", "price":"20","purchasedDate":"2015/2/16"},
-        {"id":"002", "title":"Creed", "description":"The former World Heavyweight Champion Rocky Balboa serves as a trainer and mentor to Adonis Johnson, the son of his late friend and former rival Apollo Creed.", "releasedDate":"2015","genre":"Drama | Sport", "price":"20","purchasedDate":"2015/2/16"},
-        {"id":"003", "title":"Krampus", "description":"A boy who has a bad Christmas ends up accidentally summoning a Christmas demon to his family home.", "releasedDate":"2015","genre":"Comedy | Fantasy | Horror", "price":"20","purchasedDate":"2015/2/16"},
-        {"id":"004", "title":"The Hunger Games: Mockingjay - Part 2", "description":"As the war of Panem escalates to the destruction of other districts by the Capitol, Katniss Everdeen, the reluctant leader of the rebellion, must bring together an army against President Snow, while all she holds dear hangs in the balance.", "releasedDate":"2015","genre":"Adventure | Sci-Fi", "price":"20","purchasedDate":"2015/2/16"},
-        {"id":"005", "title":"Spectre", "description":"A cryptic message from Bond's past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit to reveal the terrible truth behind SPECTRE.", "releasedDate":"2015","genre":"Action | Adventure | Thriller", "price":"20","purchasedDate":"2015/2/16"},
+    $scope.genres = [
+        {name: 'Action', value: 'Action'},
+        {name: 'Adventure', value: 'Adventure'},
+        {name: 'Fantasy', value: 'Fantasy'},
+        {name: 'Sci-Fi', value: 'Sci-Fi'},
+        {name: 'Drama', value: 'Drama'},
+        {name: 'Sport', value: 'Sport'},
+        {name: 'Comedy', value: 'Comedy'},
+        {name: 'Thriller', value: 'Thriller'},
+        {name: 'Crime', value: 'Crime'},
+        {name: 'Horror', value: 'Horror'}
     ];
 
-    console.log($scope.dvdList);
-
-    index = 0;
-
+    $scope.dvdList = [
+        {"id":"001", "title":"Star Wars: The Force Awakens", "description":"A continuation of the saga created by George Lucas and set thirty years after Jedai no fukushuu (1983).", "releasedDate":"2015","genre":["Action","Adventure","Fantasy","Sci-Fi"], "price":"20","purchasedDate":"2015/2/16", "imageName":"001.jpg"},
+        {"id":"002", "title":"Creed", "description":"The former World Heavyweight Champion Rocky Balboa serves as a trainer and mentor to Adonis Johnson, the son of his late friend and former rival Apollo Creed.", "releasedDate":"2015","genre":["Drama","Sport"], "price":"31","purchasedDate":"2015/2/16", "imageName":"002.jpg"},
+        {"id":"003", "title":"Krampus", "description":"A boy who has a bad Christmas ends up accidentally summoning a Christmas demon to his family home.", "releasedDate":"2015","genre":["Comedy","Fantasy","Horror"], "price":"41","purchasedDate":"2015/2/16", "imageName":"003.jpg"},
+    ];
     $scope.add = function() {
         $http.put('/appREST/webresources/dvdManagement',{id: $scope.id, title: $scope.title, description: $scope.description,
             releasedDate: $scope.releasedDate, genre: $scope.genre,
@@ -30,10 +36,20 @@ MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
             $("#loginBtn").addClass('hide');
             }).error(function(){
                 // TODO
-                $scope.dvdList.push({id: $scope.id, title: $scope.title, description: $scope.description,
-                    releasedDate: $scope.releasedDate, genre: $scope.genre,
-                    price: $scope.price, purchasedDate: $scope.purchasedDate
-                })
+
+            // get selected genres
+            var checks = [];
+            angular.forEach($scope.genres, function(genre) {
+                if (genre.checked) checks.push(genre.value);
+            });
+
+            $scope.dvdList.push({id: $scope.id, title: $scope.title, description: $scope.description,
+                releasedDate: $scope.releasedDate, genre: checks,
+                price: $scope.price, imageName: $scope.imageName
+            })
+
+            $scope.registFormClear();
+
         });
 
         $scope.message = "";
@@ -55,6 +71,36 @@ MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
           $scope.kakeiList = kakeiList;
       });
     };
+
+    $scope.displayGenres = function(genres){
+        return genres.join(" | ");
+    };
+
+    $scope.registFormClear = function () {
+        $scope.title = "";
+        $scope.description = "";
+        $scope.releasedDate = "";
+        $scope.price = "";
+        angular.forEach($scope.genres, function(genre) {
+            if (genre.checked) genre.checked = false;
+        });
+        $('#imageName').fileinput('clear');
+    };
+
+    angular.element(document).ready(function () {
+        $('#releasedDate').datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            language: "en",
+            autoclose: true,
+            orientation: "top auto"
+        });
+        var today = new Date();
+        var year = today.getYear();
+        if(year<1000) year+=1900;
+        $("#releasedDate").datepicker("setDate", today);
+    });
 }]);
 
 
@@ -73,3 +119,18 @@ MainApp.directive('ngConfirmBoxClick', [
         };
     }
 ]);
+
+MainApp.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                scope.$apply(function () {
+                    scope.fileread = changeEvent.target.files[0].name;
+                });
+            });
+        }
+    }
+}]);
