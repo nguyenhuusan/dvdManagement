@@ -158,7 +158,7 @@
                     <td><img ng-src="img/small/{{item.imageName}}" /> </td>
                     <td>{{item.title}}({{item.releasedDate}})</td>
                     <td class="visible-md-block visible-lg-block">{{item.description}}</td>
-                    <td nowrap class="currency">{{item.price | currency: "USD$":0}}</td>
+                    <td nowrap class="currency">{{item.price | currency: "USD$":2}}</td>
                     <td class="visible-md-block visible-lg-block">{{displayGenres(item.genre)}}</td>
                     <td>
                         <button type="button" class="btn btn-danger btn-xs" confirmed-click="delete($index)" ng-confirm-box-click="Are you sure want to delete?">
