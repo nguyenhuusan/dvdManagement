@@ -24,6 +24,7 @@ MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
         {"id":"002", "title":"Creed", "description":"The former World Heavyweight Champion Rocky Balboa serves as a trainer and mentor to Adonis Johnson, the son of his late friend and former rival Apollo Creed.", "releasedDate":"2015","genre":["Drama","Sport"], "price":"31","purchasedDate":"2015/2/16", "imageName":"002.jpg"},
         {"id":"003", "title":"Krampus", "description":"A boy who has a bad Christmas ends up accidentally summoning a Christmas demon to his family home.", "releasedDate":"2015","genre":["Comedy","Fantasy","Horror"], "price":"41","purchasedDate":"2015/2/16", "imageName":"003.jpg"},
     ];
+
     $scope.add = function() {
         $http.put('/appREST/webresources/dvdManagement',{id: $scope.id, title: $scope.title, description: $scope.description,
             releasedDate: $scope.releasedDate, genre: $scope.genre,
@@ -33,22 +34,20 @@ MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
                     releasedDate: $scope.releasedDate, genre: $scope.genre,
                     price: $scope.price, purchasedDate: $scope.purchasedDate
                 })
-            $("#loginBtn").addClass('hide');
+                $("#loginBtn").addClass('hide');
             }).error(function(){
-                // TODO
+                // get selected genres
+                var checks = [];
+                angular.forEach($scope.genres, function(genre) {
+                    if (genre.checked) checks.push(genre.value);
+                });
 
-            // get selected genres
-            var checks = [];
-            angular.forEach($scope.genres, function(genre) {
-                if (genre.checked) checks.push(genre.value);
-            });
+                $scope.dvdList.push({id: $scope.id, title: $scope.title, description: $scope.description,
+                    releasedDate: $scope.releasedDate, genre: checks,
+                    price: $scope.price, imageName: $scope.imageName
+                })
 
-            $scope.dvdList.push({id: $scope.id, title: $scope.title, description: $scope.description,
-                releasedDate: $scope.releasedDate, genre: checks,
-                price: $scope.price, imageName: $scope.imageName
-            })
-
-            $scope.registFormClear();
+                $scope.registFormClear();
 
         });
 
@@ -56,9 +55,9 @@ MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
     };
 
     $scope.delete = function(id) {
-        //alert("Delete?");
-        $http.delete('/appREST/webresources/dvdManagement/' + id  ).success(function(kakeiList){
-            $scope.kakeiList = kakeiList;
+        $http.delete('/appREST/webresources/dvdManagement/' + id  )
+            .success(function(dvdList){
+            $scope.dvdList = dvdList;
         });
         $scope.dvdList.splice(id, 1);
     };
@@ -67,8 +66,8 @@ MainApp.controller('appCtrl', ['$scope', '$http', function ($scope, $http) {
         $http.get('/appREST/webresources/dvdManagement/?searchBuyDateFrom='
           + $scope.searchBuyDateFrom + '&searchBuyDateTo=' + $scope.searchBuyDateTo + '&searchNotes=' + $scope.searchNotes
           + '&searchKamokuid=' + $scope.searchKamokuid + '&searchConsumer=' + $scope.searchConsumer
-          + '&searchPayer=' + $scope.searchPayer  ).success(function(kakeiList){
-          $scope.kakeiList = kakeiList;
+          + '&searchPayer=' + $scope.searchPayer  ).success(function(dvdList){
+          $scope.dvdList = dvdList;
       });
     };
 
